@@ -1,0 +1,28 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.bz2"
+MD5_SUM="23733a26c8276edbb1168c9bee60e40e"
+STABILITY="x86_64 x86 arm64"
+
+BDEPEND=" "
+
+simple_setup() {
+src_conf    --prefix=/usr           \
+            --enable-plugins        \
+            --enable-lto            \
+            --enable-shared         \
+            --disable-static        \
+            --disable-werror
+}
+
+simple_compile() {
+src_make tooldir=/usr
+}
+
+simple_install() {
+install_dist install
+}
+
+#simple_install() {
+
+#rm windows-like man 
+#rm $intarget/usr/share/man/man1/{dlltool,nlmconv,windres,windmc}*
+#}
