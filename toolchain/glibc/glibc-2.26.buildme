@@ -1,0 +1,33 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="102f637c3812f81111f48f2427611be1"
+STABILITY="x86_64 x86"
+
+BDEPEND=" "
+
+simple_setup() {
+
+GCC_INCDIR="/usr/lib/gcc/x86_64-pc-linux-gnu/*/include"
+
+CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
+src_conf    --prefix=/usr       \
+            --sysconfdir=/etc   \
+            --disable-werror    \
+            --enable-shared     \
+            --enable-kernel=3.2 \
+            --disable-build-nscd \
+            --disable-nscd
+
+unset GCC_INCDIR
+}
+
+simple_compile() {
+src_make
+
+sed '/test-installation/s@$(PERL)@echo not running@' -i ${S}/Makefile
+}
+
+simple_install() {
+mkdir ${D}/etc
+touch ${D}/etc/ld.so.conf
+SANDBOX_WRITE="/etc/ld.so.cache~:/etc/ld.so.cache" install_dist install
+}
