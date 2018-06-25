@@ -13,9 +13,11 @@ src_conf    --prefix=/usr       \
             --sysconfdir=/etc   \
             --disable-werror    \
             --enable-shared     \
-            --enable-kernel=3.2 \
+            --enable-kernel=4.0 \
             --disable-build-nscd \
-            --disable-nscd
+            --disable-nscd       \
+            --enable-stack-protector=strong \
+            libc_cv_slibdir=/lib
 
 unset GCC_INCDIR
 }
