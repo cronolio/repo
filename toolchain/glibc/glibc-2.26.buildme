@@ -29,7 +29,7 @@ sed '/test-installation/s@$(PERL)@echo not running@' -i ${S}/Makefile
 }
 
 simple_install() {
-mkdir ${D}/etc
+install -dm755 ${D}/etc
 touch ${D}/etc/ld.so.conf
 SANDBOX_WRITE="/etc/ld.so.cache~:/etc/ld.so.cache" install_dist install
 }
