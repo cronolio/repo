@@ -8,7 +8,7 @@ BDEPEND=" "
 simple_setup() {
 cd ${BROOT}/srcdir || return 1
 mv linux-${VERSION} linux-headers-${VERSION}
-cd ${S} || return 1
+cd ${S}/${PACKAGE}-${VERSION} || return 1
 src_make mrproper
 }
 
@@ -18,7 +18,7 @@ simple_compile() {
 
 
 simple_install() {
-cd ${S} || return 1
+cd ${S}/${PACKAGE}-${VERSION} || return 1
 install_dist INSTALL_HDR_PATH=${D}/usr headers_install
 find ${D}/usr/include \( -name .install -o -name ..install.cmd \) -delete
 }
