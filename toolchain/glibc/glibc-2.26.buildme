@@ -31,5 +31,16 @@ sed '/test-installation/s@$(PERL)@echo not running@' -i ${S}/Makefile
 simple_install() {
 install -dm755 ${D}/etc
 touch ${D}/etc/ld.so.conf
+
+# do not generate documentation
+export MAKEINFO=/dev/null
+
+# glibc makefiles on make install do "ldconfig -r <somedir>" what exacly is chroot
+# sandbox don't care about chroot 
+# so we will /etc/ld.so.cache what mean $D/etc/ld.so.cache
 SANDBOX_WRITE="/etc/ld.so.cache~:/etc/ld.so.cache" install_dist install
+
+install -dm755 ${D}/usr/lib/locale
+
+# install only required locales
 }
