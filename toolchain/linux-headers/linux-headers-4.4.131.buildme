@@ -8,6 +8,7 @@ BDEPEND=" "
 simple_setup() {
 cd ${BROOT}/srcdir || return 1
 mv linux-${VERSION} linux-headers-${VERSION}
+
 cd ${S}/${PACKAGE}-${VERSION} || return 1
 src_make mrproper
 }
