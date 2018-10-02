@@ -1,0 +1,7 @@
+# here is only list of packages which will be included to @system set
+
+toolchain/linux-headers
+toolchain/glibc
+system/tzdata
+system/zlib
+system/file
