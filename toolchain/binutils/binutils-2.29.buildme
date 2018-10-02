@@ -1,5 +1,5 @@
-SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.bz2"
-MD5_SUM="23733a26c8276edbb1168c9bee60e40e"
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="87978750715952fbb9f870940e9dcbeb"
 STABILITY="x86_64 x86 arm64"
 
 BDEPEND=" "
