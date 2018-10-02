@@ -1,0 +1,35 @@
+SRC_URL="https://data.iana.org/time-zones/releases/tzdata2018e.tar.gz -> ${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="97d654f4d7253173b3eeb76a836dd65e"
+
+STABILITY="x86_64 x86"
+
+BDEPEND="
+    toolchain/glibc
+"
+
+simple_setup() {
+    :
+}
+
+simple_compile() {
+    :
+}
+
+simple_install() {
+
+cd ${S}
+
+ZONEINFO=${D}/usr/share/zoneinfo
+mkdir -pv $ZONEINFO/{posix,right}
+
+for tz in etcetera southamerica northamerica europe africa antarctica asia australasia backward pacificnew s$
+	zic -L /dev/null   -d $ZONEINFO       -y "sh yearistype.sh" ${tz}
+	zic -L /dev/null   -d $ZONEINFO/posix -y "sh yearistype.sh" ${tz}
+	zic -L leapseconds -d $ZONEINFO/right -y "sh yearistype.sh" ${tz}
+done
+
+cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+zic -d $ZONEINFO -p America/New_York
+unset ZONEINFO
+
+}
