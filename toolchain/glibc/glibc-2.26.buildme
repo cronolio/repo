@@ -2,7 +2,9 @@ SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
 MD5_SUM="102f637c3812f81111f48f2427611be1"
 STABILITY="x86_64 x86"
 
-BDEPEND=" "
+BDEPEND="
+	toolchain/linux-headers
+"
 
 simple_setup() {
 
@@ -38,9 +40,34 @@ export MAKEINFO=/dev/null
 # glibc makefiles on make install do "ldconfig -r <somedir>" what exacly is chroot
 # sandbox don't care about chroot 
 # so we will /etc/ld.so.cache what mean $D/etc/ld.so.cache
-SANDBOX_WRITE="/etc/ld.so.cache~:/etc/ld.so.cache" install_dist install
+SANDBOX_WRITE="/etc/ld.so.cache~:/etc/ld.so.cache:/var/cache/ldconfig" install_dist install
 
 install -dm755 ${D}/usr/lib/locale
 
 # install only required locales
+
+# settings to use new ld
+# http://www.linuxfromscratch.org/lfs/view/8.1-systemd/chapter06/adjusting.html
+if [ -d /tools ]; then
+	mv -v /tools/bin/{ld,ld-old}
+	mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
+	mv -v /tools/bin/{ld-new,ld}
+	ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld
+
+	gcc -dumpspecs | sed -e 's@/tools@@g' \
+	-e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
+	-e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' >  \
+	`dirname $(gcc --print-libgcc-file-name)`/specs
+fi
 }
+
+simple_post_remove(){
+if [ -d /tools ]; then
+	rm $(dirname $(gcc --print-libgcc-file-name))/specs
+	rm /tools/$(uname -m)-pc-linux-gnu/bin/ld
+	mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld-old,ld}
+	mv -v /tools/bin/{ld,ld-new}
+	mv -v /tools/bin/{ld-old,ld}
+fi
+}
+
