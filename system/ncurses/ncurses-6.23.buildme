@@ -1,0 +1,37 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="ee13d052e1ead260d7c28071f46eefb1"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/pkg-config
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+		--libexecdir=/usr/libexec \
+		--sysconfdir=/etc \
+		--libdir=/usr/lib \
+		--datarootdir=/usr/share \
+		--with-pkg-config=/usr/bin/pkg-config \
+		--with-pkg-config-libdir=/usr/lib/pkgconfig \
+		--enable-pc-files \
+		--with-shared \
+		--with-cxx-shared \
+		--without-tests \
+		--without-debug \
+		--without-normal \
+		--enable-widec \
+		--without-ada \
+		--enable-termcap \
+		--enable-sigwinch \
+		--disable-root-environ
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
