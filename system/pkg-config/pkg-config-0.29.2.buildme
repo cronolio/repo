@@ -1,0 +1,28 @@
+SRC_URL="https://pkg-config.freedesktop.org/releases/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="f6e931e319531b736fadc017f470e68a"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+		--libexecdir=/usr/libexec \
+		--sysconfdir=/etc \
+		--libdir=/usr/lib \
+		--includedir=/usr/include \
+		--datarootdir=/usr/share \
+		--with-pc-path=/usr/lib/pkgconfig \
+		--with-internal-glib \
+		--disable-host-tool \
+		--disable-static
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
