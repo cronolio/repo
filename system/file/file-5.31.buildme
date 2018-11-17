@@ -7,7 +7,12 @@ BDEPEND="
 "
 
 simple_setup() {
-src_conf    --prefix=/usr
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share
 }
 
 simple_compile() {
