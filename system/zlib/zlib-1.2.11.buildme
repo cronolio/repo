@@ -2,10 +2,14 @@ SRC_URL="http://zlib.net/${PACKAGE}-${VERSION}.tar.xz"
 MD5_SUM="85adef240c5f370b308da8c938951a68"
 STABILITY="x86_64"
 
-BDEPEND=" "
+BDEPEND="
+	toolchain/glibc
+"
 
 simple_setup() {
 src_conf	--prefix=/usr \
+		--libdir=/usr/lib \
+		--includedir=/usr/include \
 		--64 \
 		--shared
 }
