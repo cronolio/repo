@@ -1,0 +1,20 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="205b03a87fc83dab653b628c59b9fc91"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--disable-static
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
