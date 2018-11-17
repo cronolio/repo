@@ -3,7 +3,7 @@ MD5_SUM="319627d20c9658eae85b056115b8c90a"
 STABILITY="x86_64"
 
 BDEPEND="
-toolchain/glibc
+	toolchain/glibc
 "
 
 simple_setup() {
