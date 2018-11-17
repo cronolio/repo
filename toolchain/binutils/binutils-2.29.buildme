@@ -3,18 +3,19 @@ MD5_SUM="87978750715952fbb9f870940e9dcbeb"
 STABILITY="x86_64 x86 arm64"
 
 BDEPEND="
-	    toolchain/glibc
-	    system/zlib
-	    system/file
-	    "
+	toolchain/glibc
+	system/zlib
+	system/file
+"
 
 simple_setup() {
-src_conf    --prefix=/usr           \
-            --enable-plugins        \
-            --enable-lto            \
-            --enable-shared         \
-            --disable-static        \
-            --disable-werror
+src_conf    --prefix=/usr     \
+            --enable-plugins  \
+            --enable-lto      \
+            --enable-shared   \
+            --disable-static  \
+            --disable-werror  \
+	    --with-system-zlib
 }
 
 simple_compile() {
