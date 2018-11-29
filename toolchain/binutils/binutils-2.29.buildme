@@ -5,7 +5,6 @@ STABILITY="x86_64 x86 arm64"
 BDEPEND="
 	toolchain/glibc
 	system/zlib
-	system/file
 "
 
 simple_setup() {
