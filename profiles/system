@@ -3,6 +3,12 @@
 
 toolchain/linux-headers
 toolchain/glibc
-system/tzdata
+system/gmp
+system/mpfr
+system/mpc
 system/zlib
+system/tzdata
 system/file
+system/pkg-config
+toolchain/binutils
+toolchain/gcc
