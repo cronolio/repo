@@ -1,0 +1,45 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="cda93857418655ea43590736fc3ca9fc"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/ncurses
+	system/readline
+"
+
+simple_setup(){
+
+# use sed instead of ed
+cat > ${S}/bc/fix-libmath_h << "EOF"
+#! /bin/bash
+sed -e '1   s/^/{"/' \
+    -e     's/$/",/' \
+    -e '2,$ s/^/"/'  \
+    -e   '$ d'       \
+    -i libmath.h
+
+sed -e '$ s/$/0}/' \
+    -i libmath.h
+EOF
+
+if [ -d /tools ]; then
+	sed -i -e '/flex/s/as_fn_error/: ;; # &/' ${S}/configure
+fi
+
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--with-readline
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
