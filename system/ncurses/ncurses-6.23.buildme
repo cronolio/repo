@@ -34,4 +34,12 @@ src_make
 
 simple_install(){
 install_dist install
+
+for lib in ncurses form panel menu ; do
+	echo "INPUT(-l${lib}w)" > ${D}/usr/lib/lib${lib}.so
+	ln -sfv ${lib}w.pc        ${D}/usr/lib/pkgconfig/${lib}.pc
+done
+
+echo "INPUT(-lncursesw)" > ${D}/usr/lib/libcursesw.so
+ln -sfv libncurses.so      ${D}/usr/lib/libcurses.so
 }
