@@ -4,17 +4,30 @@ STABILITY="x86_64"
 
 BDEPEND="
 	toolchain/glibc
+	system/ncurses
 "
 
 simple_setup(){
 src_conf    --prefix=/usr \
-	--disable-static
+	--sysconfdir=/etc \
+	--libdir=/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--disable-static \
+	--with-curses \
+	--enable-multibyte
 }
 
 simple_compile(){
-src_make
+src_make SHLIB_LIBS=\"-L/lib -lncursesw\"
 }
 
 simple_install(){
-install_dist install
+install_dist SHLIB_LIBS=\"-L/lib -lncursesw\" install
+
+mkdir -pv ${D}/usr/lib
+cd ${D}
+ln -sfv ../../lib/libreadline.so ${D}/usr/lib/libreadline.so
+ln -sfv ../../lib/libhistory.so ${D}/usr/lib/libhistory.so
 }
