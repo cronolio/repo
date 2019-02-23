@@ -1,6 +1,6 @@
 SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="87978750715952fbb9f870940e9dcbeb"
-STABILITY="x86_64 x86 arm64"
+MD5_SUM="acc9cd826edb9954ac7cecb81c727793"
+STABILITY="x86_64"
 
 BDEPEND="
 	toolchain/glibc
@@ -10,6 +10,7 @@ BDEPEND="
 simple_setup() {
 src_conf    --prefix=/usr     \
             --enable-plugins  \
+	    --enable-ld=default \
             --enable-lto      \
             --enable-shared   \
             --disable-static  \
@@ -22,7 +23,7 @@ src_make tooldir=/usr
 }
 
 simple_install() {
-install_dist install
+install_dist tooldir=/usr install
 }
 
 #simple_install() {
