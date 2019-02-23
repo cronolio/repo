@@ -10,10 +10,11 @@ BDEPEND="
 	system/mpc
 "
 
-simple_setup(){
-# shouldbe in simple_patch
+simple_patch(){
 sed -e '/m64=/s/lib64/lib/' -i.orig ${S}/gcc/config/i386/t-linux64
+}
 
+simple_setup(){
 SED=sed
 src_conf	--prefix=/usr       \
 		--sysconfdir=/etc   \
