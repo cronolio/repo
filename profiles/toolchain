@@ -1,0 +1,12 @@
+toolchain/linux-headers
+toolchain/glibc
+toolchain/gmp
+toolchain/mpfr
+toolchain/mpc
+system/zlib
+toolchain/gcc
+system/pkg-config
+system/m4
+system/autoconf
+system/automake
+toolchain/binutils
