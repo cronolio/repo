@@ -7,11 +7,15 @@ BDEPEND="
 	system/pkg-config
 "
 
+simple_patch(){
+sed -i '/LIBTOOL_INSTALL/d' ${S}/c++/Makefile.in
+}
+
 simple_setup(){
 src_conf    --prefix=/usr \
 		--libexecdir=/usr/libexec \
 		--sysconfdir=/etc \
-		--libdir=/usr/lib \
+		--libdir=/lib \
 		--datarootdir=/usr/share \
 		--with-pkg-config=/usr/bin/pkg-config \
 		--with-pkg-config-libdir=/usr/lib/pkgconfig \
