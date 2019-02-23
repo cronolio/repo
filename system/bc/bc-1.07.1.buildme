@@ -8,8 +8,7 @@ BDEPEND="
 	system/readline
 "
 
-simple_setup(){
-
+simple_patch(){
 # use sed instead of ed
 cat > ${S}/bc/fix-libmath_h << "EOF"
 #! /bin/bash
@@ -24,9 +23,12 @@ sed -e '$ s/$/0}/' \
 EOF
 
 if [ -d /tools ]; then
-	sed -i -e '/flex/s/as_fn_error/: ;; # &/' ${S}/configure
+    sed -i -e '/flex/s/as_fn_error/: ;; # &/' ${S}/configure
 fi
+}
 
+
+simple_setup(){
 src_conf    --prefix=/usr \
 	--libexecdir=/usr/libexec \
 	--sysconfdir=/etc \
