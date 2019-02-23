@@ -4,6 +4,7 @@ STABILITY="x86_64"
 
 BDEPEND="
 	toolchain/glibc
+	system/zlib
 "
 
 simple_setup() {
@@ -12,7 +13,8 @@ src_conf    --prefix=/usr \
 	--sysconfdir=/etc \
 	--libdir=/usr/lib \
 	--includedir=/usr/include \
-	--datarootdir=/usr/share
+	--datarootdir=/usr/share \
+	--enable-zlib
 }
 
 simple_compile() {
