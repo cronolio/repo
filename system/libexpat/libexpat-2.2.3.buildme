@@ -1,0 +1,39 @@
+SRC_URL="https://github.com/libexpat/libexpat/archive/R_2_2_3.tar.gz -> libexpat-2.2.3.tar.gz"
+MD5_SUM="9b6e3f86ec708daf2edae59875cef5d1"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/automake
+	system/autoconf
+"
+
+simple_patch(){
+cd ${S}
+mv -v libexpat-R_2_2_3 libexpat-2.2.3
+S=${BROOT}/srcdir/libexpat-2.2.3/expat
+
+sed -i 's|usr/bin/env |bin/|' ${S}/run.sh.in
+}
+
+simple_setup(){
+S=${BROOT}/srcdir/libexpat-2.2.3/expat
+pushd ${S} > /dev/null 2>&1 || return 1
+./buildconf.sh || return 1
+popd > /dev/null 2>&1 || return 1
+
+src_conf    --prefix=/usr \
+    --libexecdir=/usr/libexec \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib \
+    --includedir=/usr/include \
+    --datarootdir=/usr/share
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
