@@ -1,0 +1,72 @@
+SRC_URL="https://www.cpan.org/src/5.0/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="218d73f2334d2f3fdaff5a1f35358247"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	toolchain/gcc
+	system/groff
+"
+
+simple_setup(){
+sh ${S}/Configure -des -Dmksymlinks \
+	-Darchname=linux \
+	-Dcc=cc \
+	-Doptimize="${CFLAGS}" \
+	-Dldflags="${LDFLAGS}" \
+	-Dlddlflags="-shared ${LDFLAGS}" \
+	-Dcccdlflags=-fPIC \
+	-Dprefix=/usr \
+	-Dscriptdir=/usr/bin \
+	-Dprivlib=/usr/share/${PACKAGE}${VERSION%%.*}/${VERSION} \
+	-Darchlib=/usr/lib/${PACKAGE}${VERSION%%.*}/${VERSION}/x86_64-linux-thread-multi \
+	-Dsiteprefix=/usr \
+	-Dsitelib=/usr/lib/${PACKAGE}${VERSION%%.*}/site_perl/${VERSION} \
+	-Dsitearch=/usr/lib/${PACKAGE}${VERSION%%.*}/site_perl/${VERSION}/x86_64-linux-thread-multi \
+	-Dvendorprefix=/usr \
+	-Dvendorlib=/usr/lib/${PACKAGE}${VERSION%%.*}/vendor_perl/${VERSION} \
+	-Dvendorarch=/usr/lib/${PACKAGE}${VERSION%%.*}/vendor_perl/${VERSION}/x86_64-linux-thread-multi \
+	-Dman1dir=/usr/share/man/man1 \
+	-Dman3dir=/usr/share/man/man3 \
+	-Dsiteman1dir=/usr/local/man/man1 \
+	-Dsiteman3dir=/usr/local/man/man3 \
+	-Dvendorman1dir=/usr/share/man/man1 \
+	-Dvendorman3dir=/usr/share/man/man3 \
+	-Dman1ext=1 \
+	-Dman3ext=3pm \
+	-Dlibperl=libperl.so \
+	-Dlocincpth=/usr/include  \
+	-Dglibpth="/usr/lib /lib /usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include-fixed /usr/lib/../lib /usr/local/lib " \
+	-Duselargefiles \
+	-Dd_semctl_semun \
+	-Dmyhostname=localhost \
+	-Dcf_by=entox \
+	-Dcf_email=entox@localhost \
+	-Dperladmin=root@localhost \
+	-Dpager="/usr/bin/less -isR" \
+	-Ud_csh \
+	-Dsh=/bin/sh \
+	-Dtargetsh=/bin/sh \
+	-Uusenm \
+	-Duseshrplib \
+	-Dusethreads \
+	-Dd_libname_unique=y
+
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+#removing symlink to /tool
+if [ -d /tools ]; then
+	rm -f -- /usr/bin/perl
+fi
+}
+
+simple_post_remove(){
+ln -sv /tools/bin/perl /usr/bin/perl
+}
