@@ -34,3 +34,6 @@ system/file
 system/tzdata
 system/less
 system/bison
+system/flex
+system/gperf
+system/coreutils
