@@ -5,9 +5,9 @@ STABILITY="x86_64"
 BDEPEND="
 	toolchain/glibc
 	system/zlib
-	system/gmp
-	system/mpfr
-	system/mpc
+	toolchain/gmp
+	toolchain/mpfr
+	toolchain/mpc
 "
 
 simple_patch(){
