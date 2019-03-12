@@ -1,0 +1,46 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="ab06d68949758971fe744db66b572816"
+STABILITY="x86_64"
+
+BDEPEND="
+    toolchain/glibc
+    toolchain/gcc
+    system/gettext
+    system/intltool
+"
+
+simple_setup(){
+[ -d /tools ] && export FORCE_UNSAFE_CONFIGURE=1
+src_conf    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib \
+    --includedir=/usr/include \
+    --datarootdir=/usr/share \
+    --libexecdir=/usr/libexec \
+    --enable-threads=posix \
+    --disable-acl \
+    --disable-xattr \
+    --disable-libcap \
+    --without-selinux \
+    --enable-no-install-program=kill,uptime
+}
+
+simple_compile(){
+[ -d /tools ] && export FORCE_UNSAFE_CONFIGURE=1
+src_make
+}
+
+simple_install(){
+install_dist install
+
+install -dm755 ${D}/bin
+install -dm755 ${D}/usr/sbin
+install -dm755 ${D}/usr/share/man/man8
+mv -v ${D}/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} ${D}/bin
+mv -v ${D}/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} ${D}/bin
+mv -v ${D}/usr/bin/{rmdir,stty,sync,true,uname} ${D}/bin
+mv -v ${D}/usr/bin/chroot ${D}/usr/sbin
+mv -v ${D}/usr/share/man/man1/chroot.1 ${D}/usr/share/man/man8/chroot.8
+sed -i s/\"1\"/\"8\"/1 ${D}/usr/share/man/man8/chroot.8
+rm -rf ${D}/usr/share/doc/*
+}
