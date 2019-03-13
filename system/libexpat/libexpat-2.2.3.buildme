@@ -6,6 +6,8 @@ BDEPEND="
 	toolchain/glibc
 	system/automake
 	system/autoconf
+	system/m4
+	system/libtool
 "
 
 simple_patch(){
