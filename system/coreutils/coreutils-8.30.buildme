@@ -43,4 +43,8 @@ mv -v ${D}/usr/bin/chroot ${D}/usr/sbin
 mv -v ${D}/usr/share/man/man1/chroot.1 ${D}/usr/share/man/man8/chroot.8
 sed -i s/\"1\"/\"8\"/1 ${D}/usr/share/man/man8/chroot.8
 rm -rf ${D}/usr/share/doc/*
+
+if [ -d /tools ]; then
+    rm -f /bin/cat /bin/dd /bin/echo /bin/ln /bin/pwd /bin/rm /bin/stty /usr/bin/install
+fi
 }
