@@ -1,0 +1,31 @@
+SRC_URL="https://sourceforge.net/projects/${PACKAGE}/files/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="bbba1f701c02fb50d59540d1ff90d8d1"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/ncurses
+	system/gettext
+	system/intltool
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+install -dm755 ${D}/bin
+mv -v ${D}/usr/bin/fuser ${D}/bin/fuser
+mv -v ${D}/usr/bin/killall ${D}/bin/killall
+}
