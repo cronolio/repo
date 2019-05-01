@@ -1,0 +1,45 @@
+SRC_URL="https://tukaani.org/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="003e4d0b1b1899fc6e3000b24feddf7c"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/bash
+"
+
+simple_setup() {
+src_conf	--prefix=/usr \
+		--libdir=/usr/lib \
+		--includedir=/usr/include \
+		--disable-static \
+		--disable-doc
+}
+
+simple_compile() {
+src_make
+}
+
+simple_install() {
+install_dist install
+
+if [[ -d /tools ]]; then
+    rm -f -- /lib/liblzma*
+    rm -f -- /usr/lib/liblzma*
+fi
+
+install -dm755 ${D}/{bin,lib}
+mv -v   ${D}/usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} ${D}/bin
+mv -v ${D}/usr/lib/liblzma.so.* ${D}/lib
+ln -sfv ../../lib/$(readlink ${D}/usr/lib/liblzma.so) ${D}/usr/lib/liblzma.so
+
+}
+
+# somewhere after merge
+# ldconfig
+
+simple_post_remove(){
+if [[ -d /tools ]]; then
+	ln -sv /tools/lib/liblzma.{a,so*} /usr/lib
+	sed 's/tools/usr/' /tools/lib/liblzma.la > /usr/lib/liblzma.la
+fi
+}
