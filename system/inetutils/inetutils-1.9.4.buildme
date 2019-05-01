@@ -1,0 +1,41 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="87fef1fa3f603aef11c41dcc097af75e"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/gettext
+	system/intltool
+	system/coreutils
+	system/texinfo
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--localstatedir=/var \
+	--disable-logger \
+	--disable-whois \
+	--disable-rcp \
+	--disable-rexec \
+	--disable-rlogin \
+	--disable-rsh \
+	--disable-servers
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+install -dm755 ${D}/bin
+install -dm755 ${D}/sbin
+mv -v ${D}/usr/bin/{hostname,ping,ping6,traceroute} ${D}/bin
+mv -v ${D}/usr/bin/ifconfig ${D}/sbin
+}
