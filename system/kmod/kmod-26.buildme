@@ -1,0 +1,42 @@
+SRC_URL="https://mirrors.edge.kernel.org/pub/linux/utils/kernel/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="1129c243199bdd7db01b55a61aa19601"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/glibc
+	system/zlib
+	system/gettext
+	system/intltool
+	system/xz
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--bindir=/bin \
+	--with-rootlibdir=/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--with-xz \
+	--with-zlib \
+	--disable-debug \
+	--disable-static \
+	--disable-python \
+	--disable-gtk-doc-html
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+install -dm755 ${D}/sbin
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+	ln -sfv ../bin/kmod ${D}/sbin/${target}
+done
+
+ln -sfv kmod ${D}/bin/lsmod
+}
