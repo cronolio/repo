@@ -17,7 +17,6 @@ src_conf    --prefix=/usr       \
             --enable-shared     \
             --enable-kernel=4.0 \
             --disable-build-nscd \
-            --disable-nscd       \
             --enable-stack-protector=strong \
             libc_cv_slibdir=/lib
 
@@ -41,6 +40,11 @@ export MAKEINFO=/dev/null
 # sandbox don't care about chroot 
 # so we will /etc/ld.so.cache what mean $D/etc/ld.so.cache
 SANDBOX_WRITE="/etc/ld.so.cache~:/etc/ld.so.cache:/var/cache/ldconfig" install_dist install
+
+cp -v ${B}/nscd/nscd.conf ${D}/etc/nscd.conf
+install -dm755 ${D}/var/cache/nscd
+install -v -Dm644 ${B}/nscd/nscd.tmpfiles ${D}/usr/lib/tmpfiles.d/nscd.conf
+install -v -Dm644 ${B}/nscd/nscd.service ${D}/lib/systemd/system/nscd.service
 
 install -dm755 ${D}/usr/lib/locale
 
