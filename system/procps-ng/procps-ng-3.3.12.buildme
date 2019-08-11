@@ -7,6 +7,7 @@ BDEPEND="
 	system/ncurses
 	system/gettext
 	system/intltool
+	system/systemd
 "
 
 simple_setup(){
@@ -19,7 +20,7 @@ src_conf    --prefix=/usr \
 	--libexecdir=/usr/libexec \
 	--disable-static \
 	--disable-kill \
-	--without-systemd \
+	--with-systemd \
 	--disable-examples
 }
 
