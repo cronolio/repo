@@ -16,7 +16,6 @@ src_conf    --prefix=/usr       \
             --disable-werror    \
             --enable-shared     \
             --enable-kernel=4.0 \
-            --disable-build-nscd \
             --enable-stack-protector=strong \
             libc_cv_slibdir=/lib
 
