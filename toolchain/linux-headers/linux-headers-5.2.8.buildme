@@ -1,0 +1,25 @@
+SRC_URL="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${VERSION}.tar.xz"
+MD5_SUM="602dd0ecb8646e539fefb2beb6eb6fe0"
+STABILITY="x86_64 x86"
+
+BDEPEND=" "
+
+
+simple_setup() {
+cd ${BROOT}/srcdir || return 1
+mv linux-${VERSION} linux-headers-${VERSION}
+
+cd ${S}/${PACKAGE}-${VERSION} || return 1
+src_make mrproper
+}
+
+simple_compile() {
+    :
+}
+
+
+simple_install() {
+cd ${S}/${PACKAGE}-${VERSION} || return 1
+install_dist INSTALL_HDR_PATH=${D}/usr headers_install
+find ${D}/usr/include \( -name .install -o -name ..install.cmd \) -delete
+}
