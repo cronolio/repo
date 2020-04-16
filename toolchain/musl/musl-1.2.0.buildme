@@ -6,7 +6,7 @@ BDEPEND=""
 
 simple_setup(){
 src_conf  --prefix=/ \
-          --libdir=/lib \
+          --libdir=/usr/lib \
           --syslibdir=/lib \
           --disable-static \
           --enable-optimize
@@ -18,7 +18,7 @@ src_make
 
 simple_install(){
 install -dm755 ${D}/etc
-echo "/lib" > ${D}/etc/ld-musl-x86_64.path
+echo -e "/lib\n/usr/lib" > ${D}/etc/ld-musl-x86_64.path
 
 install_dist install
 
