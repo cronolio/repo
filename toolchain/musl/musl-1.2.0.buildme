@@ -1,0 +1,53 @@
+SRC_URL="https://musl.libc.org/releases/musl-1.2.0.tar.gz"
+MD5_SUM="5f13b13501d6ab7c2e06c69484e5a7fc"
+STABILITY="x86_64"
+
+BDEPEND=""
+
+simple_setup(){
+src_conf  --prefix=/ \
+          --libdir=/lib \
+          --syslibdir=/lib \
+          --disable-static \
+          --enable-optimize
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install -dm755 ${D}/etc
+echo "/lib" > ${D}/etc/ld-musl-x86_64.path
+
+install_dist install
+
+install -dm755 ${D}/bin
+pushd ${D}/bin
+ln -sv ../lib/ld-musl-x86_64.so.1 ldd
+popd
+
+# settings to use new ld
+# http://www.linuxfromscratch.org/lfs/view/8.1-systemd/chapter06/adjusting.html
+if [ -d /tools ]; then
+	mv -v /tools/bin/{ld,ld-old}
+	mv -v /tools/$(uname -m)-linux-musl/bin/{ld,ld-old}
+	mv -v /tools/bin/{ld-new,ld}
+	ln -sv /tools/bin/ld /tools/$(uname -m)-linux-musl/bin/ld
+
+	gcc -dumpspecs | sed -e 's@/tools@@g' \
+	-e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
+	-e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' >  \
+	`dirname $(gcc --print-libgcc-file-name)`/specs
+fi
+}
+
+simple_post_remove(){
+if [ -d /tools ]; then
+	rm $(dirname $(gcc --print-libgcc-file-name))/specs
+	rm /tools/$(uname -m)-linux-musl/bin/ld
+	mv -v /tools/$(uname -m)-linux-musl/bin/{ld-old,ld}
+	mv -v /tools/bin/{ld,ld-new}
+	mv -v /tools/bin/{ld-old,ld}
+fi
+}
