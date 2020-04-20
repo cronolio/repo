@@ -1,0 +1,27 @@
+SRC_URL="https://www.mpfr.org/${PACKAGE}-${VERSION}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="320fbc4463d4c8cb1e566929d8adc4f8"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	toolchain/gmp
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--disable-static \
+	--enable-thread-safe
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
