@@ -1,0 +1,49 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="e812da327b1c2214ac1aed440ea3ae8d"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/pkg-config
+"
+
+simple_patch(){
+sed -i '/LIBTOOL_INSTALL/d' ${S}/c++/Makefile.in
+}
+
+simple_setup(){
+src_conf    --prefix=/usr \
+		--libexecdir=/usr/libexec \
+		--sysconfdir=/etc \
+		--libdir=/lib \
+		--datarootdir=/usr/share \
+		--with-pkg-config=/usr/bin/pkg-config \
+		--with-pkg-config-libdir=/usr/lib/pkgconfig \
+		--enable-pc-files \
+		--with-shared \
+		--with-cxx-shared \
+		--without-tests \
+		--without-debug \
+		--without-normal \
+		--enable-widec \
+		--without-ada \
+		--enable-termcap \
+		--enable-sigwinch \
+		--disable-root-environ
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+for lib in ncurses form panel menu ; do
+	echo "INPUT(-l${lib}w)" > ${D}/usr/lib/lib${lib}.so
+	ln -sfv ${lib}w.pc        ${D}/usr/lib/pkgconfig/${lib}.pc
+done
+
+echo "INPUT(-lncursesw)" > ${D}/usr/lib/libcursesw.so
+ln -sfv libncurses.so      ${D}/usr/lib/libcurses.so
+}
