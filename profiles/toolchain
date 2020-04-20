@@ -1,5 +1,5 @@
 toolchain/linux-headers
-toolchain/glibc
+toolchain/musl
 toolchain/gmp
 toolchain/mpfr
 toolchain/mpc
