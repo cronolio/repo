@@ -1,0 +1,27 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="4125404e41e482ec68282a2e687f6c73"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	toolchain/gmp
+	toolchain/mpfr
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--disable-static
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
