@@ -1,0 +1,33 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="664ec3a2df7805ed3464639aaae332d6"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/zlib
+"
+
+simple_setup() {
+src_conf    --prefix=/usr     \
+            --enable-plugins  \
+            --enable-ld=default \
+            --enable-lto      \
+            --enable-shared   \
+            --disable-static  \
+            --disable-werror  \
+            --with-system-zlib
+}
+
+simple_compile() {
+src_make tooldir=/usr
+}
+
+simple_install() {
+install_dist tooldir=/usr install
+}
+
+#simple_install() {
+
+#rm windows-like man 
+#rm $intarget/usr/share/man/man1/{dlltool,nlmconv,windres,windmc}*
+#}
