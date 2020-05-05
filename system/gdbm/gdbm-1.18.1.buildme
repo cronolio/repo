@@ -1,0 +1,29 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="988dc82182121c7570e0cb8b4fcd5415"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/readline
+	system/gettext
+	system/intltool
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--disable-static \
+	--enable-libgdbm-compat
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
