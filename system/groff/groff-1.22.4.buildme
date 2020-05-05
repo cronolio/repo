@@ -1,0 +1,32 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="08fb04335e2f5e73f23ea4c3adbf0c5f"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	toolchain/gcc
+	system/gawk
+"
+
+
+simple_setup(){
+PAGE=A4 src_conf    --prefix=/usr \
+        --libexecdir=/usr/libexec \
+        --sysconfdir=/etc \
+        --libdir=/usr/lib \
+        --includedir=/usr/include \
+        --datarootdir=/usr/share \
+	--without-x \
+	--without-doc
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+# don't know how i can handle it
+rm -v ${D}/usr/lib/charset.alias
+}
