@@ -1,0 +1,66 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="2b44b47b905be16f45709648f671820b"
+
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/readline
+	system/ncurses
+"
+
+simple_fetch(){
+# this will run after default download
+for plvl in $(seq -w $(expr ${VERSION##*.} + 1) ${PATCH}); do
+	PATCH_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}-patches/${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})-${plvl}"
+	if [[ ! -f "${DISTDIR}/${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})-${plvl}" ]]; then
+		wget "${PATCH_URL}" --continue --directory-prefix="${DISTDIR}" || return 1
+	else 
+		echo "${DISTDIR}/${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})-${plvl}" file already downloaded
+	fi 
+done
+}
+
+simple_unpack(){
+shopt -s nullglob
+cp -v -- "$DISTDIR/${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})"-* "${S}" || return 1
+shopt -u nullglob
+}
+
+simple_patch(){
+for plvl in $(seq -w $(expr ${VERSION##*.} + 1) "${PATCH}"); do
+	echo -e "\e[96mApplying patch $plvl \e[0m"
+	patch -p0 -i "${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})-${plvl}"
+done
+}
+
+simple_setup(){
+src_conf   --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--without-bash-malloc \
+	--with-installed-readline \
+	--enable-multibyte \
+	--with-curses
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+# /bin directory does not exists
+install -dm755 ${D}/bin
+mv -vf ${D}/usr/bin/bash ${D}/bin/bash
+}
+
+simple_post_remove(){
+if [ -d /tools ]; then
+	ln -sv /tools/bin/bash /bin/bash
+fi
+}
