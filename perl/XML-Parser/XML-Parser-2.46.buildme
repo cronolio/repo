@@ -1,0 +1,30 @@
+SRC_URL="http://cpan.metacpan.org/authors/id/T/TO/TODDR/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="80bb18a8e6240fcf7ec2f7b57601c170"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	perl/perl
+	perl/Devel-CheckLib
+	system/expat
+"
+
+simple_setup(){
+cd ${S}
+perl Makefile.PL
+}
+
+simple_compile(){
+cd ${S}
+src_make
+}
+
+simple_install(){
+cd ${S}
+install_dist install
+
+# this package use /usr/local/man for man pages
+mkdir -vp ${D}/usr/share/man
+mv -v ${D}/usr/local/man ${D}/usr/share/man
+rmdir ${D}/usr/local
+}
