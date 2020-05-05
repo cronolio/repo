@@ -1,0 +1,26 @@
+SRC_URL="ftp://ftp.astron.com/pub/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="3217633ed09c7cd35ed8d04191675574"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/zlib
+"
+
+simple_setup() {
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--enable-zlib
+}
+
+simple_compile() {
+src_make
+}
+
+simple_install() {
+install_dist install
+}
