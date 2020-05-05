@@ -1,0 +1,27 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="111b117d22d6a7d049d6ae7505e9c4d2"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/pcre
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--enable-threads=posix \
+	--enable-perl-regexp
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
