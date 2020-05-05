@@ -1,0 +1,28 @@
+SRC_URL="https://cpan.metacpan.org/authors/id/M/MA/MATTN/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="3519cbf9fe5ec3404449d5330ee5537f"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	perl/perl
+"
+
+simple_setup(){
+cd ${S}
+perl Makefile.PL
+}
+
+simple_compile(){
+cd ${S}
+src_make
+}
+
+simple_install(){
+cd ${S}
+install_dist install
+
+# this package use /usr/local/man for man pages
+mkdir -vp ${D}/usr/share/man
+mv -v ${D}/usr/local/man ${D}/usr/share/man  
+rmdir ${D}/usr/local
+}
