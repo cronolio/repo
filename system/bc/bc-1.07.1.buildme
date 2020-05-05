@@ -3,7 +3,7 @@ MD5_SUM="cda93857418655ea43590736fc3ca9fc"
 STABILITY="x86_64"
 
 BDEPEND="
-	toolchain/glibc
+	toolchain/musl
 	system/ncurses
 	system/readline
 "
