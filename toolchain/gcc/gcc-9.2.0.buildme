@@ -72,7 +72,7 @@ fi
 ########## aaaaah ###########
 # it will remove gcc symlinks to gcc in /tool from real system
 if [ -d /tools ]; then
-	rm -f /usr/lib/libgcc_s.so /usr/lib/libstdc++.la /usr/lib/libstdc++.so /usr/lib/libstdc++.so.6
+	rm -f /usr/lib/libgcc_s.so{,.1} /usr/lib/libstdc++.{la,a,so{,.6}} /usr/lib/libssp_nonshared.{la,a}
 fi
 }
 
@@ -81,5 +81,7 @@ simple_post_remove(){
 ln -sfv /tools/lib/gcc /usr/lib
 ln -sv /tools/lib/libgcc_s.so{,.1} /usr/lib
 ln -sv /tools/lib/libstdc++.{a,so{,.6}} /usr/lib
+ln -sv /tools/lib/libssp_nonshared.a /usr/lib
 sed 's/tools/usr/' /tools/lib/libstdc++.la > /usr/lib/libstdc++.la
+sed 's/tools/usr/' /tools/lib/libssp_nonshared.la > /usr/lib/libssp_nonshared.la
 }
