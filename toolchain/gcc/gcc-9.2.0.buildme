@@ -47,7 +47,6 @@ src_conf	--prefix=/usr   \
 		--enable-languages=c,c++ \
 		--disable-multilib  \
 		--disable-bootstrap \
-		--disable-static    \
 		--enable-lto        \
 		--with-system-zlib
 }
