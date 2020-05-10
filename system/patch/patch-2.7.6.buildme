@@ -1,0 +1,30 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="78ad9937e4caadcba1526ef1853730d5"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/attr
+"
+
+
+simple_setup(){
+PAGE=A4 src_conf    --prefix=/usr \
+        --libexecdir=/usr/libexec \
+        --sysconfdir=/etc \
+        --libdir=/usr/lib \
+        --includedir=/usr/include \
+        --datarootdir=/usr/share \
+	--enable-xattr
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+#dunno how to handle it
+rm -v ${D}/usr/lib/charset.alias
+}
