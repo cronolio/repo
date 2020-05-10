@@ -1,0 +1,27 @@
+SRC_URL="https://www.kernel.org/pub/linux/libs/security/linux-privs/${PACKAGE}${VERSION%.*}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="52120c05dc797b01f5a7ae70f4335e96"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/attr
+"
+
+simple_patch(){
+sed -i '/install.*STA...LIBNAME/d' libcap/Makefile
+}
+
+simple_setup(){
+	:
+}
+
+simple_compile(){
+cd ${S}
+src_make lib=lib prefix=/usr DYNAMIC=yes GOLANG=no
+}
+
+simple_install(){
+cd ${S}
+install_dist lib=lib prefix=/usr DYNAMIC=yes GOLANG=no install
+chmod -v 755 ${D}/lib/libcap.so.${VERSION}
+}
