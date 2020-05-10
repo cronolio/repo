@@ -1,0 +1,26 @@
+SRC_URL="http://www.greenwoodsoftware.com/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="4ad4408b06d7a6626a055cb453f36819"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/ncurses
+"
+
+
+simple_setup(){
+src_conf    --prefix=/usr \
+        --libexecdir=/usr/libexec \
+        --sysconfdir=/etc \
+        --libdir=/usr/lib \
+        --includedir=/usr/include \
+        --datarootdir=/usr/share
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
