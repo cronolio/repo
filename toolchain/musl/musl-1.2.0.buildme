@@ -45,6 +45,8 @@ fi
 simple_post_remove(){
 if [ -d /tools ]; then
 	rm $(dirname $(gcc --print-libgcc-file-name))/specs
+	rm -v /etc/ld-musl-x86_64.path
+	rm -v /bin/ldd
 	rm /tools/$(uname -m)-linux-musl/bin/ld
 	mv -v /tools/$(uname -m)-linux-musl/bin/{ld-old,ld}
 	mv -v /tools/bin/{ld,ld-new}
