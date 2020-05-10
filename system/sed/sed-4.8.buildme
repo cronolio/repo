@@ -1,0 +1,30 @@
+SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="6d906edfdb3202304059233f51f9a71d"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	perl/perl
+"
+
+
+simple_setup(){
+src_conf    --prefix=/usr \
+        --libexecdir=/usr/libexec \
+        --sysconfdir=/etc \
+        --libdir=/usr/lib \
+        --includedir=/usr/include \
+        --datarootdir=/usr/share \
+	--bindir=/bin \
+	--without-selinux \
+	--disable-acl \
+	--enable-threads=posix
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
