@@ -1,0 +1,22 @@
+SRC_URL="https://github.com/mesonbuild/meson/releases/download/${VERSION}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="9bf73f7b5a2426a7c8674a809bb8cae2"
+STABILITY="x86_64"
+
+BDEPEND="
+	python/python
+"
+
+
+simple_setup(){
+	:
+}
+
+simple_compile(){
+cd ${S}
+python3 setup.py build
+}
+
+simple_install(){
+cd ${S}
+python3 setup.py install --prefix=/usr --root=${D}
+}
