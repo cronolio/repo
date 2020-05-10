@@ -9,7 +9,6 @@ src_conf  --prefix=/ \
           --libdir=/usr/lib \
           --includedir=/usr/include \
           --syslibdir=/lib \
-          --disable-static \
           --enable-optimize
 }
 
