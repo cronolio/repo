@@ -1,0 +1,32 @@
+SRC_URL="https://ftp.pcre.org/pub/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="3bcd2441024d00009a5fee43f058987c"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/readline
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--enable-pcre16	\
+	--enable-pcre32	\
+	--disable-static \
+	--enable-utf \
+	--enable-pcregrep-libz \
+	--enable-unicode-properties \
+	--enable-pcretest-libreadline
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
