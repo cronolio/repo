@@ -7,6 +7,8 @@ BDEPEND="
     toolchain/gcc
     system/gettext
     system/intltool
+    system/attr
+    system/libcap
 "
 
 simple_setup(){
@@ -19,8 +21,8 @@ src_conf    --prefix=/usr \
     --libexecdir=/usr/libexec \
     --enable-threads=posix \
     --disable-acl \
-    --disable-xattr \
-    --disable-libcap \
+    --enable-xattr \
+    --enable-libcap \
     --without-selinux \
     --enable-no-install-program=kill,uptime
 }
