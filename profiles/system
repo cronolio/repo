@@ -2,7 +2,7 @@
 #
 
 toolchain/linux-headers
-toolchain/glibc
+toolchain/musl
 system/pkg-config
 system/ncurses
 system/readline
