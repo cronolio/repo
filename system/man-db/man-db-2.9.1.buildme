@@ -1,0 +1,47 @@
+SRC_URL="http://download.savannah.gnu.org/releases/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="593f4f0a26ab4f66f5b81cf6c0c7364c"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/pkg-config
+	system/gettext
+	system/intltool
+	system/libpipeline
+	system/flex
+	system/coreutils
+	system/less
+	system/xz
+	system/gzip
+	system/groff
+	system/gdbm
+	system/coreutils
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--disable-setuid \
+	--enable-cache-owner=bin \
+	--with-browser=/usr/bin/lynx \
+	--with-vgrind=/usr/bin/vgrind \
+	--with-grap=/usr/bin/grap \
+	--with-systemdtmpfilesdir=no \
+	--with-systemdsystemunitdir=no \
+	--enable-mandirs=GNU \
+	--enable-threads=posix \
+	--enable-automatic-create \
+	--disable-static
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
