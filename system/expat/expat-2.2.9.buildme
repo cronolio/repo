@@ -1,0 +1,32 @@
+SRC_URL="https://github.com/lib${PACKAGE}/lib${PACKAGE}/releases/download/R_${VERSION//./_}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="d2384fa607223447e713e1b9bd272376"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/automake
+	system/autoconf
+	system/m4
+	system/libtool
+"
+
+simple_patch(){
+sed -i 's|usr/bin/env |bin/|' ${S}/run.sh.in
+}
+
+simple_setup(){
+src_conf    --prefix=/usr \
+    --libexecdir=/usr/libexec \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib \
+    --includedir=/usr/include \
+    --datarootdir=/usr/share
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
