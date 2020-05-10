@@ -1,0 +1,29 @@
+SRC_URL="http://download.savannah.gnu.org/releases/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="bc1e5cb5c96d99b24886f1f527d3bb3d"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--disable-static
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+install -dm755 ${D}/lib
+mv -v ${D}/usr/lib/libattr.so.* ${D}/lib
+ln -sfv ../../lib/$(readlink ${D}/usr/lib/libattr.so) ${D}/usr/lib/libattr.so
+}
