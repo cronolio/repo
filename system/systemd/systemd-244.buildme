@@ -1,0 +1,44 @@
+SRC_URL=" https://github.com/systemd/systemd/archive/v${VERSION}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="413121fe918b252ae62310f6fc7c4b32"
+STABILITY="x86_64"
+
+BDEPEND="
+	system/meson
+	system/libcap
+"
+
+simple_patch(){
+sed -i 's/GROUP="render", //' ${S}/rules.d/50-udev-default.rules.in
+}
+
+simple_setup(){
+LANG=en_US.UTF-8                   \
+meson --prefix=/usr                \
+      --sysconfdir=/etc            \
+      --localstatedir=/var         \
+      -Dblkid=true                 \
+      -Dbuildtype=release          \
+      -Ddefault-dnssec=no          \
+      -Dfirstboot=false            \
+      -Dinstall-tests=false        \
+      -Dkmod-path=/bin/kmod        \
+      -Dldconfig=false             \
+      -Dmount-path=/bin/mount      \
+      -Drootprefix=                \
+      -Drootlibdir=/lib            \
+      -Dsplit-usr=true             \
+      -Dsulogin-path=/sbin/sulogin \
+      -Dsysusers=false             \
+      -Dumount-path=/bin/umount    \
+      -Db_lto=false                \
+      -Drpmmacrosdir=no            \
+      ${S}
+}
+
+simple_compile(){
+return 1
+}
+
+simple_install(){
+return 1
+}
