@@ -3,7 +3,7 @@ MD5_SUM="12e517cac2b57a0121cda351570f1e63"
 STABILITY="x86_64"
 
 BDEPEND="
-	toolchain/glibc
+	toolchain/musl
 	perl/perl
 	perl/XML-Parser
 "
