@@ -3,7 +3,7 @@ MD5_SUM="2882e3179748cc9f9c23ec593d6adc8d"
 STABILITY="x86_64"
 
 BDEPEND="
-	toolchain/glibc
+	toolchain/musl
 	system/gettext
 	system/intltool
 "
