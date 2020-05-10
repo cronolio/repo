@@ -1,0 +1,33 @@
+SRC_URL="https://www.openssl.org/source/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="3be209000dbc7e1b95bcdf47980a3baa"
+STABILITY="x86_64"
+
+BDEPEND="
+	perl/perl
+	system/make
+"
+
+simple_setup(){
+cd ${S}
+
+./config  --prefix=/usr \
+	--openssldir=/etc/ssl \
+	--libdir=lib \
+	shared \
+	zlib-dynamic \
+	no-tests
+}
+
+simple_compile(){
+cd ${S}
+src_make
+}
+
+simple_install(){
+cd ${S}
+install_dist install_sw
+install_dist install_man_docs
+#belong to shadow
+rm -v ${D}/usr/share/man/man1/passwd.1
+}
+
