@@ -19,7 +19,7 @@ system/m4
 system/autoconf
 system/gettext
 system/automake
-system/libexpat
+system/expat
 perl/XML-Parser
 system/intltool
 system/make
