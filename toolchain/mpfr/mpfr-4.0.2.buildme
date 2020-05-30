@@ -1,5 +1,5 @@
 SRC_URL="https://www.mpfr.org/${PACKAGE}-${VERSION}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="320fbc4463d4c8cb1e566929d8adc4f8"
+MD5_SUM="320fbc4463d4c8cb1e566929d8adc4f8 mpfr-4.0.2.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
