@@ -1,5 +1,5 @@
 SRC_URL="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${VERSION}.tar.xz"
-MD5_SUM="602dd0ecb8646e539fefb2beb6eb6fe0"
+MD5_SUM="602dd0ecb8646e539fefb2beb6eb6fe0 linux-5.2.8.tar.xz"
 STABILITY="x86_64 x86"
 
 BDEPEND=" "
