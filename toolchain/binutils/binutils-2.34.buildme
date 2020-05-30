@@ -1,5 +1,5 @@
 SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="664ec3a2df7805ed3464639aaae332d6"
+MD5_SUM="664ec3a2df7805ed3464639aaae332d6 binutils-2.34.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
