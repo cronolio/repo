@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="f7caabb65cddc1a4165b398009bd05b9"
+MD5_SUM="f7caabb65cddc1a4165b398009bd05b9 gzip-1.8.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
