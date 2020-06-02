@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="78ad9937e4caadcba1526ef1853730d5"
+MD5_SUM="78ad9937e4caadcba1526ef1853730d5 patch-2.7.6.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
