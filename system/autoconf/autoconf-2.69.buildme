@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="50f97f4159805e374639a73e2636f22e"
+MD5_SUM="50f97f4159805e374639a73e2636f22e autoconf-2.69.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
