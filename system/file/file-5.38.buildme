@@ -1,5 +1,5 @@
 SRC_URL="ftp://ftp.astron.com/pub/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="3217633ed09c7cd35ed8d04191675574"
+MD5_SUM="3217633ed09c7cd35ed8d04191675574 file-5.38.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
