@@ -1,5 +1,5 @@
 SRC_URL="http://download.savannah.gnu.org/releases/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="169de4cc1f6f7f7d430a5bed858b2fd3"
+MD5_SUM="169de4cc1f6f7f7d430a5bed858b2fd3 libpipeline-1.5.2.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
