@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="0009a224d8e288e8ec406ef0161f9293"
+MD5_SUM="0009a224d8e288e8ec406ef0161f9293 coreutils-8.31.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
