@@ -1,5 +1,5 @@
 SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="fc7a67ea86ace13195b0bce683fd4469"
+MD5_SUM="fc7a67ea86ace13195b0bce683fd4469 make-4.3.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
