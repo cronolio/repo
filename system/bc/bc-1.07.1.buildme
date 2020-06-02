@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="cda93857418655ea43590736fc3ca9fc"
+MD5_SUM="cda93857418655ea43590736fc3ca9fc bc-1.07.1.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
