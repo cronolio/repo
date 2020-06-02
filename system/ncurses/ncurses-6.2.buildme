@@ -1,5 +1,5 @@
 SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="e812da327b1c2214ac1aed440ea3ae8d"
+MD5_SUM="e812da327b1c2214ac1aed440ea3ae8d ncurses-6.2.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
