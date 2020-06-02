@@ -1,5 +1,5 @@
 SRC_URL=" https://github.com/westes/flex/releases/download/v${VERSION}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="2882e3179748cc9f9c23ec593d6adc8d"
+MD5_SUM="2882e3179748cc9f9c23ec593d6adc8d flex-2.6.4.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
