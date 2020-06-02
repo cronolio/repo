@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="9e251c0a618ad0824b51117d5d9db87e"
+MD5_SUM="9e251c0a618ad0824b51117d5d9db87e gperf-3.1.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
