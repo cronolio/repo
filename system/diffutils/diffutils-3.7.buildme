@@ -1,5 +1,5 @@
 SRC_URL="http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="4824adc0e95dbbf11dfbdfaad6a1e461"
+MD5_SUM="4824adc0e95dbbf11dfbdfaad6a1e461 diffutils-3.7.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
