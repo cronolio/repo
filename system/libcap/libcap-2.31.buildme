@@ -1,5 +1,5 @@
 SRC_URL="https://www.kernel.org/pub/linux/libs/security/linux-privs/${PACKAGE}${VERSION%.*}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="52120c05dc797b01f5a7ae70f4335e96"
+MD5_SUM="52120c05dc797b01f5a7ae70f4335e96 libcap-2.31.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
