@@ -1,5 +1,5 @@
 SRC_URL="https://tukaani.org/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="aa1621ec7013a19abab52a8aff04fe5b"
+MD5_SUM="aa1621ec7013a19abab52a8aff04fe5b xz-5.2.5.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
