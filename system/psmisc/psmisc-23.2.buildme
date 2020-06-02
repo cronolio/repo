@@ -1,5 +1,5 @@
 SRC_URL="https://sourceforge.net/projects/${PACKAGE}/files/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="0524258861f00be1a02d27d39d8e5e62"
+MD5_SUM="0524258861f00be1a02d27d39d8e5e62 psmisc-23.2.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
