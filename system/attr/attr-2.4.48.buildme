@@ -1,5 +1,5 @@
 SRC_URL="http://download.savannah.gnu.org/releases/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="bc1e5cb5c96d99b24886f1f527d3bb3d"
+MD5_SUM="bc1e5cb5c96d99b24886f1f527d3bb3d attr-2.4.48.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
