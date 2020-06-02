@@ -1,5 +1,5 @@
 SRC_URL="http://download.savannah.gnu.org/releases/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="593f4f0a26ab4f66f5b81cf6c0c7364c"
+MD5_SUM="593f4f0a26ab4f66f5b81cf6c0c7364c man-db-2.9.1.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
