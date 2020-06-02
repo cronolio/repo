@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="730bb15d96fffe47e148d1e09235af82"
+MD5_SUM="730bb15d96fffe47e148d1e09235af82 m4-1.4.18.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
