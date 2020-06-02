@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="d4c5d8cc84438c5993ec5163a59522a6"
+MD5_SUM="d4c5d8cc84438c5993ec5163a59522a6 texinfo-6.7.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
