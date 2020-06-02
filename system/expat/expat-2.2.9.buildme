@@ -1,5 +1,5 @@
 SRC_URL="https://github.com/lib${PACKAGE}/lib${PACKAGE}/releases/download/R_${VERSION//./_}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="d2384fa607223447e713e1b9bd272376"
+MD5_SUM="d2384fa607223447e713e1b9bd272376 expat-2.2.9.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
