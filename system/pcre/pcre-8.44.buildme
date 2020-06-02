@@ -1,5 +1,5 @@
 SRC_URL="https://ftp.pcre.org/pub/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="3bcd2441024d00009a5fee43f058987c"
+MD5_SUM="3bcd2441024d00009a5fee43f058987c pcre-8.44.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
