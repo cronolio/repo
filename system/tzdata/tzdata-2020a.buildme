@@ -1,5 +1,11 @@
-SRC_URL="http://data.iana.org/time-zones/releases/${PACKAGE}${VERSION}.tar.gz -> ${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="96a985bb8eeab535fb8aa2132296763a"
+SRC_URL="
+	http://data.iana.org/time-zones/releases/${PACKAGE}${VERSION}.tar.gz -> ${PACKAGE}-${VERSION}.tar.gz
+	http://data.iana.org/time-zones/releases/tzcode2020a.tar.gz -> tzcode-2020a.tar.gz
+"
+MD5_SUM="
+	96a985bb8eeab535fb8aa2132296763a tzdata-2020a.tar.gz
+	f87c3477e85a5c4b00df0def6c6a0055 tzcode-2020a.tar.gz
+"
 
 STABILITY="x86_64"
 
@@ -8,29 +14,42 @@ BDEPEND="
 "
 
 simple_setup() {
-    :
+:
 }
 
 simple_compile() {
-    :
+cd ${S}
+src_make TZDIR="/usr/share/zoneinfo"
 }
 
 simple_install() {
-
 cd ${S}
 
 ZONEINFO=${D}/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}
 
 for tz in etcetera southamerica northamerica europe africa antarctica  \
-          asia australasia backward pacificnew systemv; do
-	zic -L /dev/null   -d $ZONEINFO       -y "sh yearistype.sh" ${tz}
-	zic -L /dev/null   -d $ZONEINFO/posix -y "sh yearistype.sh" ${tz}
-	zic -L leapseconds -d $ZONEINFO/right -y "sh yearistype.sh" ${tz}
+	asia australasia backward pacificnew systemv; do
+	./zic -L /dev/null   -d $ZONEINFO       ${tz}
+	./zic -L /dev/null   -d $ZONEINFO/posix ${tz}
+	./zic -L leapseconds -d $ZONEINFO/right ${tz}
 done
 
 cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
-zic -d $ZONEINFO -p America/New_York
+./zic -d $ZONEINFO -p America/New_York
 unset ZONEINFO
 
+mkdir -pv ${D}/usr/sbin
+cp -v zic ${D}/usr/sbin
+
+mkdir -pv ${D}/usr/bin
+cp -v zdump tzselect ${D}/usr/bin
+
+mkdir -pv ${D}/usr/lib
+cp -v libtz.a ${D}/usr/lib
+
+mkdir -pv ${D}/usr/share/man/man{3,5,8}
+cp -fv newctime.3 newtzset.3 ${D}/usr/share/man/man3
+cp -fv tzfile.5 ${D}/usr/share/man/man5
+cp -fv tzselect.8 zdump.8 zic.8 ${D}/usr/share/man/man8
 }
