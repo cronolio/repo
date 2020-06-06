@@ -1,0 +1,33 @@
+SRC_URL="https://dev.gentoo.org/~blueness/eudev/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="dedfb1964f6098fe9320de827957331f eudev-3.2.9.tar.gz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/pkg-config
+	system/kmod
+	system/gperf
+"
+
+simple_setup(){
+src_conf --prefix=/usr \
+	--bindir=/sbin \
+	--sbindir=/sbin \
+	--libdir=/usr/lib \
+	--sysconfdir=/etc \
+	--libexecdir=/lib \
+	--with-rootprefix= \
+	--with-rootlibdir=/lib \
+	--enable-manpages \
+	--disable-static
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install -dm755 ${D}/lib/udev/rules.d
+install -dm755 ${D}/etc/udev/rules.d
+install_dist install
+}
