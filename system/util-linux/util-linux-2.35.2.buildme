@@ -1,0 +1,53 @@
+SRC_URL="https://www.kernel.org/pub/linux/utils/util-linux/v2.35/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="248a4d0810c9193e0e9a4bb3f26b93d8 util-linux-2.35.2.tar.xz"
+
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/pkg-config
+	system/ncurses
+	system/readline
+	system/gettext
+	system/eudev
+"
+
+simple_setup(){
+src_conf ADJTIME_PATH=/var/lib/hwclock/adjtime \
+	--disable-chfn-chsh \
+	--disable-login \
+	--disable-nologin \
+	--disable-su      \
+	--disable-setpriv \
+	--disable-runuser \
+	--disable-pylibmount \
+	--disable-static  \
+	--without-python  \
+	--without-systemd \
+	--without-systemdsystemunitdir
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install -dm755 ${D}/var/lib/hwclock
+
+if [ -d /tools ]; then
+	for lib in blkid lzma mount uuid; do
+		rm -v /usr/lib/lib$lib.{a,la,so*}
+	done
+fi
+install_dist install
+}
+
+simple_post_remove(){
+if [ -d /tools ]; then
+	for lib in blkid lzma mount uuid; do
+		ln -sv /tools/lib/lib$lib.{a,so*} /usr/lib
+		sed 's/tools/usr/' /tools/lib/lib${lib}.la > /usr/lib/lib${lib}.la
+	done
+fi
+
+}
