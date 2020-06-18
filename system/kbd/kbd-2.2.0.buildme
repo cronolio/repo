@@ -1,0 +1,34 @@
+SRC_URL="https://www.kernel.org/pub/linux/utils/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="d1d7ae0b5fb875dc082731e09cd0c8bc kbd-2.2.0.tar.xz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/pkg-config
+"
+
+
+simple_patch(){
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' ${S}/configure
+sed -i 's/resizecons.8 //' ${S}/docs/man/man8/Makefile.in
+}
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--enable-static \
+	--disable-vlock \
+	--disable-tests 
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
