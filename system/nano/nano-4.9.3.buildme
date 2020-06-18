@@ -1,0 +1,35 @@
+SRC_URL="https://www.nano-editor.org/dist/v4/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="52137a960ae8b3ca6d7dab6767fe6e5f nano-4.9.3.tar.xz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/zlib
+	system/pkg-config
+	system/ncurses
+	system/file
+	system/gettext
+"
+
+simple_setup(){
+src_conf  --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--libexecdir=/usr/libexec \
+	--includedir=/usr/include \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--enable-utf8 \
+	--disable-extra	\
+	--enable-libmagic \
+	--enable-color \
+	--enable-nls
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
