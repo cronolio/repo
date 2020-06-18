@@ -1,0 +1,27 @@
+SRC_URL="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="932a0f0307ffd83c1d2be01295b003de libressl-3.1.1.tar.gz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	#system/ca-certs
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--disable-static \
+	--with-openssldir=/etc/ssl
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
