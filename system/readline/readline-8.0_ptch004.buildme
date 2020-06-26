@@ -1,0 +1,66 @@
+SRC_URL="
+	http://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.gz
+	https://ftp.gnu.org/gnu/readline/readline-8.0-patches/readline80-001
+	https://ftp.gnu.org/gnu/readline/readline-8.0-patches/readline80-002
+	https://ftp.gnu.org/gnu/readline/readline-8.0-patches/readline80-003
+	https://ftp.gnu.org/gnu/readline/readline-8.0-patches/readline80-004
+"
+MD5_SUM="
+	7e6c1f16aee3244a69aba6e438295ca3 readline-8.0.tar.gz
+	c3e27b8a0d8e37a4172654e5f3ef2eec readline80-001
+	2e631f1973dfe4b0ef042c40b8fdb47e readline80-002
+	9d2344b399237fa7abdbcf966b364c97 readline80-003
+	0c0406762a9afcd34c6a77268fea0ccb readline80-004
+"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/ncurses
+"
+
+simple_patch(){
+cp -v -- "$DISTDIR/${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})"-* "${S}" || return 1
+shopt -u nullglob
+
+for plvl in $(seq -w $(expr ${VERSION##*.} + 1) "${PATCH}"); do
+	echo -e "\e[96mApplying patch $plvl \e[0m"
+	patch -p0 -i "${PACKAGE}$(v=${VERSION/./}; echo ${v%.*})-${plvl}"
+done
+
+
+sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+# link to ncurses
+sed -i 's/SHLIB_LIBS = @SHLIB_LIBS@/SHLIB_LIBS = @SHLIB_LIBS@ -lncursesw/g' shlib/Makefile.in
+}
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--sysconfdir=/etc \
+	--libdir=/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--disable-static \
+	--enable-multibyte
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+if ! readelf -d ${D}/lib/libreadline.so | grep -q 'NEEDED.*ncurses'; then
+	echo "readline needs to be linked against ncurses"
+	return 1
+fi
+
+mkdir -pv ${D}/usr/lib
+cd ${D}
+ln -sfv ../../lib/libreadline.so ${D}/usr/lib/libreadline.so
+ln -sfv ../../lib/libhistory.so ${D}/usr/lib/libhistory.so
+}
