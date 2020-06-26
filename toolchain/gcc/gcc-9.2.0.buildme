@@ -1,5 +1,16 @@
-SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="3818ad8600447f05349098232c2ddc78"
+SRC_URL="
+	https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}/${PACKAGE}-${VERSION}.tar.xz
+	http://port70.net/~nsz/musl/gcc-9.1.0/0001-ssp_nonshared.patch
+	http://port70.net/~nsz/musl/gcc-9.1.0/0002-posix_memalign.patch
+	http://port70.net/~nsz/musl/gcc-9.1.0/0013-invalid-tls-model.patch
+"
+MD5_SUM="
+	3818ad8600447f05349098232c2ddc78 gcc-9.2.0.tar.xz
+	2051c748b3e3bebaf88cef414dec30cf 0001-ssp_nonshared.patch
+	a1f86aa79d2bf3f4bfe7adf662d602c9 0002-posix_memalign.patch
+	6dae929f6dae7a8ca6adc7d9ae9cc84d 0013-invalid-tls-model.patch
+"
+
 STABILITY="x86_64"
 
 BDEPEND="
@@ -9,22 +20,6 @@ BDEPEND="
 	toolchain/mpfr
 	toolchain/mpc
 "
-
-simple_fetch(){
-# this will run after default download
-patches_url='http://port70.net/~nsz/musl/gcc-9.1.0'
-patches='0001-ssp_nonshared.patch 0002-posix_memalign.patch 0013-invalid-tls-model.patch'
-
-for file in $patches; do
-  if [[ ! -f "${DISTDIR}/$file" ]]; then
-    wget "${patches_url}/$file" --continue --directory-prefix="${DISTDIR}" || return 1
-  else
-    echo "$file" file already dowloaded
-  fi
-done
-
-unset patches_url patches file
-}
 
 simple_patch(){
 cd ${S}
@@ -42,13 +37,14 @@ unset patches file
 
 simple_setup(){
 SED=sed
-src_conf	--prefix=/usr   \
-		--sysconfdir=/etc   \
-		--enable-languages=c,c++ \
-		--disable-multilib  \
-		--disable-bootstrap \
-		--enable-lto        \
-		--with-system-zlib
+src_conf  --prefix=/usr \
+	--sysconfdir=/etc \
+	--enable-languages=c,c++ \
+	--disable-multilib \
+	--disable-bootstrap \
+	--enable-lto \
+	--with-system-zlib \
+	--disable-libsanitizer
 }
 
 simple_compile(){
