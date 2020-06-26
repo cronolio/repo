@@ -8,7 +8,8 @@ BDEPEND="
 "
 
 simple_patch(){
-sed -i '/LIBTOOL_INSTALL/d' ${S}/c++/Makefile.in
+#sed -i '/LIBTOOL_INSTALL/d' ${S}/c++/Makefile.in
+sed -i s/mawk// configure
 }
 
 simple_setup(){
