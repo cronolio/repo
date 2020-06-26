@@ -28,7 +28,6 @@ sed -e '/m64=/s/lib64/lib/' -i.orig ${S}/gcc/config/i386/t-linux64
 patches='0001-ssp_nonshared.patch 0002-posix_memalign.patch 0013-invalid-tls-model.patch'
 
 for file in $patches; do
-  pwd
   patch -p1 <${DISTDIR}/$file || return 1 
 done
 
