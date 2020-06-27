@@ -5,7 +5,6 @@ STABILITY="x86_64"
 BDEPEND="
 	system/m4
 	system/autoconf
-	system/gettext
 "
 
 
