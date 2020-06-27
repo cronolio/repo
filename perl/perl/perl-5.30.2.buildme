@@ -1,5 +1,5 @@
 SRC_URL="https://www.cpan.org/src/5.0/${PACKAGE}-${VERSION}.tar.xz"
-MD5_SUM="4bfa12b528522a50de0470b8b70b9b3b"
+MD5_SUM="4bfa12b528522a50de0470b8b70b9b3b perl-5.30.2.tar.xz"
 STABILITY="x86_64"
 
 BDEPEND="
