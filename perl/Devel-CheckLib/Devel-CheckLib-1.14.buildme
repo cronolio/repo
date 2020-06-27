@@ -1,5 +1,5 @@
 SRC_URL="https://cpan.metacpan.org/authors/id/M/MA/MATTN/${PACKAGE}-${VERSION}.tar.gz"
-MD5_SUM="3519cbf9fe5ec3404449d5330ee5537f"
+MD5_SUM="3519cbf9fe5ec3404449d5330ee5537f Devel-CheckLib-1.14.tar.gz"
 STABILITY="x86_64"
 
 BDEPEND="
