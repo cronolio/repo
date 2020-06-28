@@ -4,6 +4,8 @@ STABILITY="x86_64"
 
 BDEPEND="
 	toolchain/musl
+	system/ncurses
+	system/gettext
 	system/gettext
 	system/intltool
 	system/coreutils
@@ -38,4 +40,7 @@ install -dm755 ${D}/bin
 install -dm755 ${D}/sbin
 mv -v ${D}/usr/bin/{hostname,ping,ping6,traceroute} ${D}/bin
 mv -v ${D}/usr/bin/ifconfig ${D}/sbin
+
+# don't know how i can handle it
+rm -v ${D}/usr/lib/charset.alias
 }
