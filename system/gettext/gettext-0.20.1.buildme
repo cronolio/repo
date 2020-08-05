@@ -37,6 +37,6 @@ src_make
 
 simple_install(){
 install_dist install
-ln -sfv gmsgfmt ${D}/usr/bin/msgfmt
+ln -sfv msgfmt ${D}/usr/bin/gmsgfmt
 rm -rf ${D}/usr/share/doc
 }
