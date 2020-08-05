@@ -1,0 +1,32 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="5aaca6713b47ca2456d8324a58755ac7 grub-2.04.tar.xz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	toolchain/gcc
+	system/pkg-config
+	system/make
+	system/bison
+	python/python
+"
+
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--libexecdir=/usr/libexec \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--disable-efiemu \
+	--disable-werror
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
