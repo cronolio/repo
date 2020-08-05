@@ -28,8 +28,7 @@ src_conf    --prefix=/usr \
 	--with-included-glib \
 	--with-included-libcroco \
 	--with-included-libunistring \
-	--enable-nls \
-	--without-included-gettext
+	--enable-nls
 }
 
 simple_compile(){
