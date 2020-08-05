@@ -1,0 +1,31 @@
+SRC_URL="https://ftp.gnu.org/gnu/${PACKAGE}/${PACKAGE}-${VERSION}.tar.xz"
+MD5_SUM="731356dec4b1109b812fecfddfead6b2 findutils-4.7.0.tar.xz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	python/python
+"
+
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--bindir=/bin \
+	--sbindir=/sbin \
+        --libexecdir=/usr/libexec \
+        --sysconfdir=/etc \
+        --libdir=/usr/lib \
+        --includedir=/usr/include \
+        --datarootdir=/usr/share \
+	--localstatedir=/var/lib/locate \
+	--enable-threads=posix \
+	--without-selinux
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+}
