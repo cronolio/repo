@@ -1,0 +1,36 @@
+SRC_URL="
+	http://download.savannah.gnu.org/releases/sysvinit/sysvinit-${VERSION}.tar.xz
+	http://www.linuxfromscratch.org/patches/lfs/9.1/sysvinit-2.96-consolidated-1.patch
+"
+
+MD5_SUM="
+	48cebffebf2a96ab09bec14bf9976016 sysvinit-2.96.tar.xz
+	4900322141d493e74020c9cf437b2cdc sysvinit-2.96-consolidated-1.patch
+"
+
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/make
+"
+
+simple_patch(){
+patch -p1 <${DISTDIR}/sysvinit-2.96-consolidated-1.patch
+
+}
+
+simple_setup(){
+	:
+}
+
+simple_compile(){
+cd ${S}
+export DISTRO=
+src_make
+}
+
+simple_install(){
+cd ${S}
+install_dist install ROOT="${D}"
+}
