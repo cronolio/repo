@@ -1,17 +1,12 @@
 # here is only list of packages which will be included to @system set
 #
 
-toolchain/linux-headers
 toolchain/musl
 system/pkg-config
 system/ncurses
 system/readline
-toolchain/gmp
-toolchain/mpfr
 system/gawk
-toolchain/mpc
 system/zlib
-toolchain/gcc
 system/groff
 perl/perl
 perl/Devel-CheckLib
@@ -28,7 +23,6 @@ system/shadow
 system/pcre
 system/grep
 system/bash
-toolchain/binutils
 system/libtool
 system/file
 system/tzdata
@@ -54,11 +48,8 @@ system/procps-ng
 system/psmisc
 system/tar
 system/tzdata
-system/util-linux
 system/xz
 
-
+system/kmod
 system/eudev
-
-
-
+system/util-linux
