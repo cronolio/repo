@@ -1,5 +1,15 @@
-SRC_URL="https://musl.libc.org/releases/musl-1.2.0.tar.gz"
-MD5_SUM="5f13b13501d6ab7c2e06c69484e5a7fc musl-1.2.0.tar.gz"
+SRC_URL="
+	https://musl.libc.org/releases/musl-1.2.0.tar.gz
+	https://git.alpinelinux.org/aports/plain/main/musl/getent.c
+	https://git.alpinelinux.org/aports/plain/main/musl/getconf.c
+	https://git.alpinelinux.org/aports/plain/main/musl/iconv.c	
+"
+MD5_SUM="
+	5f13b13501d6ab7c2e06c69484e5a7fc musl-1.2.0.tar.gz
+	eadc8794eadb79dbc383b2b91a32084d getent.c
+	57ef2c63b9ec6a2041694ace97d4ffa2 getconf.c
+	45f92f8d59cf84d765de698a9578dbf4 iconv.c
+"
 STABILITY="x86_64"
 
 BDEPEND="
@@ -15,6 +25,10 @@ src_conf  --prefix=/ \
 }
 
 simple_compile(){
+for i in getent getconf iconv ; do
+	gcc -I/tools/include "${LDFLAGS}" "${DISTDIR}"/$i.c -o $i || return 1
+done
+
 src_make
 }
 
@@ -25,6 +39,7 @@ echo -e "/lib\n/usr/lib" > ${D}/etc/ld-musl-x86_64.path
 install_dist install
 
 install -dm755 ${D}/bin
+install -D "${B}"/getent "${B}"/getconf "${B}"/iconv "${D}"/bin
 pushd ${D}/bin
 ln -sv ../lib/ld-musl-x86_64.so.1 ldd
 popd
