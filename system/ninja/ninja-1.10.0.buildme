@@ -1,0 +1,21 @@
+SRC_URL="https://github.com/ninja-build/ninja/archive/v${VERSION}/ninja-${VERSION}.tar.gz"
+MD5_SUM="cf1d964113a171da42a8940e7607e71a ninja-1.10.0.tar.gz"
+STABILITY="x86_64"
+
+BDEPEND="
+	python/python
+"
+
+simple_setup(){
+:
+}
+simple_compile(){
+cd ${S}
+python3 configure.py --bootstrap
+}
+
+simple_install(){
+cd ${S}
+install -dm755 ${D}/usr/bin
+install -vm755 ninja ${D}/usr/bin/ninja
+}
