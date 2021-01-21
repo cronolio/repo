@@ -1,0 +1,36 @@
+SRC_URL="https://downloads.sourceforge.net/project/${PACKAGE}/${PACKAGE}/v${VERSION}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="cccfb706d162514e4f9dbfbc9e5d65ee e2fsprogs-1.45.6.tar.gz"
+STABILITY="x86_64"
+
+BDEPEND="
+	toolchain/musl
+	system/util-linux
+"
+
+simple_setup(){
+src_conf    --prefix=/usr \
+	--bindir=/bin     \
+	--sysconfdir=/etc \
+	--libdir=/usr/lib \
+	--includedir=/usr/include \
+	--datarootdir=/usr/share \
+	--libexecdir=/usr/libexec \
+	--enable-threads=posix \
+	--with-root-prefix="" \
+        --enable-elf-shlibs   \
+        --disable-libblkid    \
+        --disable-libuuid     \
+        --disable-uuidd       \
+        --disable-fsck        \
+	--without-included-gettext
+}
+
+simple_compile(){
+src_make
+}
+
+simple_install(){
+install_dist install
+
+rm ${D}/usr/lib/charset.alias
+}
