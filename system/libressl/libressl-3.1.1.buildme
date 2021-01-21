@@ -4,8 +4,8 @@ STABILITY="x86_64"
 
 BDEPEND="
 	toolchain/musl
-	#system/ca-certs
 "
+#system/ca-certs
 
 simple_setup(){
 src_conf    --prefix=/usr \
