@@ -4,7 +4,6 @@ STABILITY="x86_64"
 
 BDEPEND="
 	toolchain/musl
-	python/python
 "
 
 
