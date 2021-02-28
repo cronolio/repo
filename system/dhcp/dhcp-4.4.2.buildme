@@ -1,0 +1,34 @@
+SRC_URL="https://ftp.isc.org/isc/${PACKAGE}/${VERSION}/${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="2afdaf8498dc1edaf3012efdd589b3e1 dhcp-4.4.2.tar.gz"
+STABILITY="x86_64"
+
+
+BDEPEND="
+    toolchain/musl
+    toolchain/gcc
+"
+
+simple_setup(){
+#cp -- "${S}/configure.ac+lt" "${S}/configure.ac"
+#autoreconf -i ${S}
+src_conf --prefix=/usr \
+  --sysconfdir=/etc/dhcp \
+  --libdir=/usr/lib \
+  --includedir=/usr/include \
+  --datarootdir=/usr/share \
+  --libexecdir=/usr/libexec \
+  --localstatedir=/var \
+  --disable-dhcpv6 \
+  --with-cli-lease-file=/var/lib/dhclient/dhclient.leases
+}
+
+simple_compile(){
+src_make -j1
+}
+
+simple_install(){
+install_dist -C client install
+mkdir ${D}/sbin
+mv -v ${D}/usr/sbin/dhclient ${D}/sbin
+install -v -m755 ${S}/client/scripts/linux ${D}/sbin/dhclient-script
+}
