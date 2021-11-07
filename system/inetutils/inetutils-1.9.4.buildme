@@ -26,7 +26,8 @@ src_conf    --prefix=/usr \
 	--disable-rexec \
 	--disable-rlogin \
 	--disable-rsh \
-	--disable-servers
+	--disable-servers \
+  --disable-ipv6
 }
 
 simple_compile(){
@@ -38,7 +39,7 @@ install_dist install
 
 install -dm755 ${D}/bin
 install -dm755 ${D}/sbin
-mv -v ${D}/usr/bin/{hostname,ping,ping6,traceroute} ${D}/bin
+mv -v ${D}/usr/bin/{hostname,ping,traceroute} ${D}/bin
 mv -v ${D}/usr/bin/ifconfig ${D}/sbin
 
 # don't know how i can handle it
