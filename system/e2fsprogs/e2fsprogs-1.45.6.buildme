@@ -32,5 +32,6 @@ src_make
 simple_install(){
 install_dist install
 
-rm ${D}/usr/lib/charset.alias
+rm -f ${D}/usr/lib/charset.alias
+rm -f ${D}/bin/{compile_et,mk_cmds}
 }
