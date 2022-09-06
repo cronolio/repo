@@ -1,0 +1,22 @@
+SRC_URL="https://github.com/Subsentient/${PACKAGE}/archive/refs/tags/${VERSION}.tar.gz -> ${PACKAGE}-${VERSION}.tar.gz"
+MD5_SUM="4fb63e1ceefa22c332450f25b7ea2a84 epoch-1.3.0.tar.gz"
+STABILITY="x86_64"
+
+BDEPEND="
+  toolchain/musl
+"
+
+simple_setup() {
+return 0
+}
+
+simple_compile() {
+cd ${S}
+./buildepoch.sh --disable-backtraces
+#src_make -DNO_EXECINFO
+}
+
+simple_install() {
+cd ${S}
+cp -r built/* ${D}
+}
